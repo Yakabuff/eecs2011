@@ -1,0 +1,48 @@
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class FileList<E> extends FileContainer implements List<E>{
+
+	public FileList(String fileName) {
+		super.fileName = fileName;
+	}
+	
+	public FileList() {
+		
+	}
+	
+	
+	@Override
+	public String getFileName() {
+		// TODO Auto-generated method stub
+		return super.fileName;
+	}
+
+	@Override
+	public long getFileSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	boolean add(E e) {
+		return false;
+	}
+	
+	void add(int index, E element) {
+		
+	}
+	
+	void clear() {
+		
+	}
+	
+	E remove(int index) {
+		return null;
+	}
+
+
+	
+
+}

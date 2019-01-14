@@ -1,0 +1,43 @@
+
+public class FileList<E> extends FileContainer{
+
+	public FileList(String fileName) {
+		super.fileName = fileName;
+	}
+	
+	public FileList() {
+		
+	}
+	
+	
+	@Override
+	public String getFileName() {
+		// TODO Auto-generated method stub
+		return super.fileName;
+	}
+
+	@Override
+	public long getFileSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	boolean add(E e) {
+		return false;
+	}
+	
+	void add(int index, E element) {
+		
+	}
+	
+	void clear() {
+		
+	}
+	
+	E remove(int index) {
+		return null;
+	}
+	
+	
+
+}
