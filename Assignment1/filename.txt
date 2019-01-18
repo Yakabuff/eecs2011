@@ -1,2 +1,1 @@
-Integer -4
-Double 2.2
+Integer -3

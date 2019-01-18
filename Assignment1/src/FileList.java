@@ -33,14 +33,21 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 
 	FileOutputStream fs;
 
+	private static int fileNum;
+	
 	public FileList(String fileName){
 
 		elements = new ArrayList<E>(0);
 		file = new File(fileName);
 		try {
+
+			
+			if(file.exists()) {
+				loadIntoArray(file);
+				System.out.println("trutru");
+			}
 			fs = new FileOutputStream(file);
 			pw = new PrintWriter(fs,true);
-			
 			
 
 		} catch (IOException e) {
@@ -56,8 +63,21 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 
 
 	public FileList() {
+		super.fileName = "file"+fileNum;
 
+		file = new File(fileName);
+		
+		try {
+			fs = new FileOutputStream(file);
+			pw = new PrintWriter(fs,true);
+			
+			
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	//////////////////////////////////////////////	
@@ -73,11 +93,54 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 		return file.getTotalSpace();
 	}
 	///////////////////////////////////////////////
+	
+	void loadIntoArray(File file) {
+		
 
+		String currentLine;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			while((currentLine = br.readLine()) != null) {
+
+				String[] words = currentLine.split("\\s+");
+				
+				if(words[0].equals("Integer")) {
+					Integer i = Integer.valueOf(words[1]);
+					elements.add((E) i);
+				}else if(words[0].equals("Float")) {
+					Float f = Float.valueOf(words[1]);
+					elements.add((E) f);
+				}else if(words[0].equals("Byte")) {
+					Byte b = Byte.valueOf(words[1]);
+					elements.add((E) b);
+				}else if(words[0].equals("Double")) {
+					Double d = Double.valueOf(words[1]);
+					elements.add((E) d);
+				}else if(words[0].equals("Short")) {
+					Short s = Short.valueOf(words[1]);
+					elements.add((E) s);
+				}else if(words[0].equals("Long")) {
+					Long l = Long.valueOf(words[1]);
+					elements.add((E) l);
+				}
+				
+
+			}
+		} catch (IOException e) {
+
+		}
+	}
+	
+	void restoreFile() {
+		
+	}
+	
+	
 	@Override
 	public boolean add(E e) {
 		// TODO Auto-generated method stub
 		elements.add(e);
+		
 		pw = new PrintWriter(fs,true);
 
 		pw.println(e.getClass().getSimpleName() +" "+e);
@@ -205,8 +268,9 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 	public E remove(int index) {
 		// TODO Auto-generated method stub
 		E removed = elements.get(index);
-		elements.remove(removed);
-
+		
+		remove(removed);
+		
 		return removed;
 	}
 
