@@ -223,7 +223,7 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 		FileOutputStream fs;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			Scanner scanner = new Scanner(file);
+			//Scanner scanner = new Scanner(file);
 			o = (Number)o;
 			String line = "";
 			StringBuilder sb = new StringBuilder();

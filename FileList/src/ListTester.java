@@ -16,9 +16,9 @@ public class ListTester {
 				 System.out.printf("%6d", listAdd(N, currentList, Position.beginning));
 				 System.out.printf("%6d", listAdd(N, currentList, Position.end));
 				 System.out.printf("%6d", listAdd(N, currentList, Position.random));
-				 //System.out.printf("%10d", listRemove(N, currentList, Position.beginning));
-				 //System.out.printf("%6d", listRemove(N, currentList, Position.end));
-				 //System.out.printf("%6d", listRemove(N, currentList, Position.random));
+				 System.out.printf("%10d", listRemove(N, currentList, Position.beginning));
+				 System.out.printf("%6d", listRemove(N, currentList, Position.end));
+			     System.out.printf("%6d", listRemove(N, currentList, Position.random));
 				 if (N <100_000)
 					 System.out.printf("%12d", listRemove(N, currentList, Position.byValue));
 				 System.out.println();
