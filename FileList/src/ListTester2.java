@@ -24,21 +24,21 @@ public class ListTester2 {
 				 
 				  System.out.println();
 				  
-				  List add = new FileList();
+				  List add = new FileList("add "+N);
 				  
 				  System.out.printf("%-22s", add.getClass().getSimpleName());
 				  System.out.printf("%6d", listAdd(N, add, "beg"));
 				  System.out.printf("%6d", listAdd(N, add, "end"));
 				  System.out.printf("%6d", listAdd(N, add, "random"));
 				  
-				  List removeBeg = new FileList();
+				  List removeBeg = new FileList("removeBeg "+N);
 				  System.out.printf("%10d", listRemove(N, removeBeg, "beg"));
 				  
-				  List removeEnd = new FileList();
+				  List removeEnd = new FileList("removeEnd "+N);
 				  System.out.printf("%6d", listRemove(N, removeEnd, "end"));
-				  List removeRandom = new FileList();
+				  List removeRandom = new FileList("removeRandom" + N);
 				  System.out.printf("%6d", listRemove(N, removeRandom, "random"));
-				  List removeValue = new FileList();
+				  List removeValue = new FileList("removeValue "+N);
 				  System.out.printf("%12d", listRemove(N, removeValue, "byValue"));
 				 
 				  System.out.println();

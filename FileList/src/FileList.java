@@ -49,7 +49,7 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 				loadIntoArray(file);
 				fs = new FileOutputStream(file);
 				pw = new PrintWriter(fs,true);
-				System.out.println("trutru");
+				System.out.println("File already exists: Loading contents into list");
 				restoreFile(file);
 			}else {
 			fs = new FileOutputStream(file);
@@ -98,7 +98,7 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 	@Override
 	public long getFileSize() {
 		// TODO Auto-generated method stub
-		return file.getTotalSpace();
+		return file.length();
 	}
 	///////////////////////////////////////////////
 	
@@ -153,11 +153,11 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 		// TODO Auto-generated method stub
 		elements.add(e);
 		
-		pw = new PrintWriter(fs,true);
 
 		pw.println(e.getClass().getSimpleName() +" "+e.toString());
 		
-
+//		pw.close();
+//		pw = null;
 		return true;
 	}
 
@@ -179,11 +179,12 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 			String file = String.join(System.lineSeparator(), lines);
 			
 			//fs = new FileOutputStream(file);
-			pw = new PrintWriter(new FileOutputStream(fileName),true);
+			PrintWriter addIndex = new PrintWriter(new FileOutputStream(fileName),true);
 			
-			pw.println(file);
+			addIndex.println(file);
 			//System.out.println("printing");
-
+			
+			this.pw = addIndex;
 
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -192,28 +193,23 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 
 
 	}
+	
+	
 
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		elements.clear();
+		elements = new ArrayList<E>(0);;
 
 		try {
 			FileOutputStream fs = new FileOutputStream(file);
 			pw = new PrintWriter(fs,true);
-			fs.close();
+		
 		}catch (IOException e1) {
 
 		}
 	}
-	
-	private void print(File file, String input) {
-		pw.println(input);
-		//System.out.println("Printing " + input);
-		
-	}
-
 
 	@Override
 	public boolean remove(Object o) {
@@ -228,17 +224,26 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 			String line = "";
 			StringBuilder sb = new StringBuilder();
 			while((line = br.readLine()) != null) {
-				sb.append(line).append(System.lineSeparator());
+				sb.append(line).append("\r\n");
 			}
+			
+			
 			
 			String text = sb.toString();
 			//String text = scanner.useDelimiter("\\A").next();
 			//text = text.replaceFirst(o.getClass().getSimpleName()+" "+o.toString()+"\r\n", "");
 			text = text.replaceFirst(o.getClass().getSimpleName()+" "+o.toString()+"\r\n", "");
-			fs = new FileOutputStream(file);
-			pw = new PrintWriter(fs,true);
 			
-			pw.println(text);
+			StringBuilder cut = new StringBuilder(text);
+			
+			cut.setLength(cut.length()-2);
+			
+			fs = new FileOutputStream(file);
+			PrintWriter removeObj = new PrintWriter(fs,true);
+			
+			removeObj.println(cut.toString());
+			
+			this.pw = removeObj;
 			
 
 		} catch (IOException e) {
@@ -293,11 +298,80 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 
 
 	@Override
+	public String toString() {
+		
+		String s="[";
+		if(elements.size()>0) {
+		s = s + elements.get(0);
+		
+		for(int i = 1; i<elements.size();i++) {
+			s =s + (", "+ elements.get(i)); 
+		}
+		}
+		s = s + "]";
+		return s;
+	}
+
+
+	@Override
 	public E remove(int index) {
 		// TODO Auto-generated method stub
 		E removed = elements.get(index);
 		
-		remove(removed);
+		
+		
+		try {
+			
+
+		
+		//pw.println(file);
+		//System.out.println("printing");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		
+		
+		StringBuilder beg = new StringBuilder("");
+		StringBuilder end  = new StringBuilder("");
+		
+		
+		for(int i = 0; i < elements.size(); i++) {
+		    
+		    if(i < index) {
+		    	
+		    	if(i+1 == index) {
+		    		beg.append(reader.readLine());
+		    	}else {
+		    		beg.append(reader.readLine()+"\r\n");
+		    	}
+		    	
+		    }else if (i > index) {
+
+		    	if((i +1) == elements.size()) {
+		    		end.append(reader.readLine());
+		    	}else {
+		    	end.append(reader.readLine()+"\r\n");
+		    	}
+		    	
+		    }else if(i == index) {
+		    	reader.readLine();
+		    	
+		    	
+		    }
+		}
+
+		elements.remove(index);
+		fs = new FileOutputStream(file);
+		PrintWriter removeIndex = new PrintWriter(new FileOutputStream(fileName),true);
+		
+
+		removeIndex.println(beg.toString());
+		
+		removeIndex.println(end.toString());
+		
+		this.pw = removeIndex;
+		}catch(IOException e1) {
+			
+		}
+		
 		
 		return removed;
 	}
@@ -419,6 +493,8 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
+
+
 
 
 
