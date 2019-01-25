@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class tester {
 	
@@ -8,33 +10,37 @@ public class tester {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		FileList list = new FileList("file1.txt");
+		FileList list = new FileList("file_1.txt");
 		
 		
 
 //beginning
-		list.add(0,1);
-		list.add(0,2);
-		list.add(0,3);
-		list.add(0,4);
-		list.add(0,5);
-		list.add(0,6);
+
 		
 		Integer i = new Integer(2);
 		Integer j = new Integer(3);
-		list.remove(i);
-		list.remove(j);
-		list.clear();
+
 		
-		list.add(0,1);
+		list.add(0,20.0F);
 		list.add(1,2);
 		list.add(2,3);
-		list.add(3,4);
+		list.add(3,20.0F);
 		
-		list.remove(1);
-		list.remove(2);
+		list.remove(0);
 		
-		list.clear();
+		list.add(-2.2);
+		list.add(20L);
+		
+		FileList list2 = new FileList("file_1.txt");
+		
+		list2.remove(20.0F);
+		list2.add(1,10L);
+		list2.remove(0);
+		list2.remove(list2.size()-1);
+		list2.add(-2.2);
+		
+		System.out.println(list2.toString());
+		
 		
 		
 //		FileList list2 = new FileList("123.list");
