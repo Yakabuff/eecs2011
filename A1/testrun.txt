@@ -1,0 +1,13 @@
+N = 10    : ms to Ins. start, end, rnd; Rmv. start, end, rnd; Rmv. by value
+ArrayList                  1     0     0         0     0     0           0
+FileList                  34     1    10         7     5     5           5
+N = 100   : ms to Ins. start, end, rnd; Rmv. start, end, rnd; Rmv. by value
+ArrayList                  1     0     0         0     0     1           1
+FileList                  99     7    73        54    51    36          40
+N = 1000  : ms to Ins. start, end, rnd; Rmv. start, end, rnd; Rmv. by value
+ArrayList                  1     0     1         0     1     1          14
+FileList                 712    77   964       678   634   661         733
+N = 10000 : ms to Ins. start, end, rnd; Rmv. start, end, rnd; Rmv. by value
+ArrayList                  8     2     6         8     1     5         142
+FileList               15292   130 15108     20056 23847 21874       33129
+done
