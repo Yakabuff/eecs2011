@@ -16,46 +16,34 @@ public class test {
 
 		System.out.println("...................");
 		
-		myList.add(4);
-		myList.add(null);
-		myList.add(6e0);
-		System.out.println(myList.elements[0]);
-		System.out.println(myList.elements[1]);
-		System.out.println(myList.elements[2]);
+		myList.add(1);
+		myList.add(2.2);
+		
+		myList.add(1,-3);
+		myList.add(1,-4);
+		
+		//Integer i = new Integer(1);
+		//myList.remove(i);
+		
+		//Integer j = new Integer(-3);
+		//myList.remove(j);
+		
+		//myList.remove(0);
+
+		
+		//myList.remove(0);
+
+		
+		FileList list2 = new FileList("filename.txt");
+		
+		System.out.println(list2.elements.get(0));
+		System.out.println(list2.elements.get(1));
+		System.out.println(list2.elements.get(2));
+		System.out.println(list2.elements.get(3));
 		
 		
-		myList.remove(null);
-		System.out.println("...................");
-		System.out.println(myList.elements[0]);
-		System.out.println(myList.elements[1]);
-		//System.out.println(myList.elements[2]);
-		
-		
-		//File file = new File("123.list");
-		
-		FileList list2 = new FileList();
-		
-		
-		
-//		try {
-//		
-//		
-//		BufferedWriter output = new BufferedWriter(new FileWriter(file));          
-//		output.write("abc");
-//		output.close();
-//		}catch(IOException e ){
-//			
-//		}
-//
-//		try {
-//		
-//		FileWriter fileWriter = new FileWriter(file, true);
-//		BufferedWriter output = new BufferedWriter(fileWriter);          
-//		output.write(123);
-//		output.close();
-//		}catch(IOException e ){
-//			
-//		}
+		Integer j = new Integer(-3);
+		list2.add(j);
 		
 		
 	}
