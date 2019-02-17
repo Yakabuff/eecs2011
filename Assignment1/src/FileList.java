@@ -38,17 +38,23 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 	public FileList(String fileName){
 
 		elements = new ArrayList<E>(0);
+
 		file = new File(fileName);
+		
 		try {
 
 			
 			if(file.exists()) {
 				loadIntoArray(file);
+				fs = new FileOutputStream(file);
+				pw = new PrintWriter(fs,true);
 				System.out.println("trutru");
-			}
+				restoreFile(file);
+			}else {
 			fs = new FileOutputStream(file);
 			pw = new PrintWriter(fs,true);
 			
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -63,20 +69,21 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 
 
 	public FileList() {
-		super.fileName = "file"+fileNum;
-
-		file = new File(fileName);
+		//this.fileName = "file"+fileNum+".txt";
+		this("file"+fileNum+".txt");
+		fileNum++;
+		//file = new File(fileName);
 		
-		try {
-			fs = new FileOutputStream(file);
-			pw = new PrintWriter(fs,true);
-			
-			
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			fs = new FileOutputStream(file);
+//			pw = new PrintWriter(fs,true);
+//			
+//			
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 
@@ -131,7 +138,17 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 		}
 	}
 	
-	void restoreFile() {
+	void restoreFile(File file) {
+		
+			
+
+				
+				for(Number n : elements) {
+					pw.println(n.getClass().getSimpleName()+" "+n.toString() );
+					}
+				
+				
+
 		
 	}
 	
@@ -193,7 +210,7 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 	
 	private void print(File file, String input) {
 		pw.println(input);
-		System.out.println("Printing " + input);
+		//System.out.println("Printing " + input);
 		
 	}
 
@@ -210,7 +227,7 @@ public class FileList<E extends Number> extends FileContainer implements List<E>
 			for(Object n : elements) {
 				if(!n.equals(o)) {
 					
-					print(file,n.getClass().getSimpleName()+" "+n.toString() );
+					print(file,n.getClass().getSimpleName()+" "+n.toString());
 				}
 			}
 		} catch (FileNotFoundException e) {
